@@ -31,11 +31,8 @@ exports.createPages = async ({ actions, graphql }) => {
   )
   // console.log(result)
   const dataContentList = result.data.allStrapiDataContentTest.nodes;
-  console.log(dataContentList)
   if (dataContentList.length > 0) {
     dataContentList.forEach((article) => {
-      console.log( `/article/${article.slug}`)
-      console.log( `/article/${article.id}`)
       createPage({
         path: `/article/${article.slug}`,
         component: articlePost,
