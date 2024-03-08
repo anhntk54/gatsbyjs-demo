@@ -7,6 +7,7 @@ const axios = require('axios');
 // Step 2: Define your component
 const IndexPage = () => {
     useEffect(() => {
+        console.log('useEffect')
         const ge =  async () => {
             const data = await axios.get('https://1ebd-14-191-183-97.ngrok-free.app');
             console.log(data);
@@ -15,7 +16,7 @@ const IndexPage = () => {
     }, [])
     return (
         <Layout pageTitle="Home Page">
-            <h1>Welcome to my Gatsby site!</h1>
+            <h1>Welcome to my Ga;lâlatsby site!</h1>
 
             <Link to="/about">About</Link>
             <p>I'm making this by following the Gatsby Tutorial.</p>
