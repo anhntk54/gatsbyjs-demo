@@ -2,9 +2,17 @@
 import * as React from 'react'
 import {Link} from "gatsby";
 import Layout from "../components/layout";
-
+import {useEffect} from "react";
+const axios = require('axios');
 // Step 2: Define your component
 const IndexPage = () => {
+    useEffect(() => {
+        const ge =  async () => {
+            const data = await axios.get('https://1ebd-14-191-183-97.ngrok-free.app');
+            console.log(data);
+        }
+        ge();
+    }, [])
     return (
         <Layout pageTitle="Home Page">
             <h1>Welcome to my Gatsby site!</h1>
