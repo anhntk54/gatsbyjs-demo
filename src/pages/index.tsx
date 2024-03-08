@@ -6,18 +6,20 @@ import {useEffect} from "react";
 const axios = require('axios');
 // Step 2: Define your component
 const IndexPage = () => {
-    useEffect(() => {
-        console.log('useEffect')
-        const ge =  async () => {
+    const ge =  async () => {
+        console.log('ge')
             const data = await axios.get('https://1ebd-14-191-183-97.ngrok-free.app');
             console.log(data);
         }
+    useEffect(() => {
+        console.log('useEffect')
+
         ge();
     }, [])
     return (
         <Layout pageTitle="Home Page">
             <h1>Welcome to my Ga;lâlatsby site!</h1>
-
+            <button onClick={ge}>click</button>
             <Link to="/about">About</Link>
             <p>I'm making this by following the Gatsby Tutorial.</p>
         </Layout>
