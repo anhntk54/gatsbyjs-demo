@@ -37,4 +37,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # Project name đã được đổi thành 'nextjs'
-          command: pages deploy .open-next --project-name=nextjs-demo
+          command: pages deploy .open-next --project-name=nextjs-demo --compatibility-flags=nodejs_compat
