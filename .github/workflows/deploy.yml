@@ -24,15 +24,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
       - name: Build with OpenNext
-          # Thêm biến môi trường CI=true và lệnh khởi tạo nếu thiếu
-        run: |
-          if [ ! -f open-next.config.ts ]; then
-            npx @opennextjs/cloudflare migrate --yes
-          fi
-          npx @opennextjs/cloudflare build
-        env:
-          CI: true
+        # Thêm command 'build' để tránh lỗi "got 0, need at least 1"
+        run: npx @opennextjs/cloudflare build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
