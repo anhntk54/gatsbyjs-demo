@@ -9,7 +9,17 @@ const config = {
       queue: "dummy",
     },
   },
-  // Nếu bạn có dùng các thư viện node native như crypto, hãy thêm vào đây
+  middleware: {
+    external: true,
+    override: {
+      wrapper: "cloudflare-edge",
+      converter: "edge",
+      proxyExternalRequest: "fetch",
+      incrementalCache: "dummy",
+      tagCache: "dummy",
+      queue: "dummy",
+    },
+  },
   edgeExternals: ["node:crypto"],
 };
 
