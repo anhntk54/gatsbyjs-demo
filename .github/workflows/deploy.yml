@@ -35,4 +35,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # Sử dụng lệnh deploy của Worker thay vì Pages
           # OpenNext build xong cho Worker sẽ nằm ở .open-next/worker.js
-          command: deploy .open-next/worker.js --name nextjs --compatibility-flag=nodejs_compat --compatibility-date=2024-11-01
+          command: deploy .open-next/worker.js --name nextjs --compatibility-flags nodejs_compat --compatibility-date 2024-11-01
