@@ -1,4 +1,4 @@
-name: Deploy Next.js to Cloudflare
+name: Deploy Next.js to Cloudflare Workers
 
 on:
   push:
@@ -8,10 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
@@ -28,13 +24,15 @@ jobs:
           npm install @opennextjs/cloudflare@1.17.1 --save-dev
 
       - name: Build with OpenNext
-        # Thêm command 'build' để tránh lỗi "got 0, need at least 1"
-        run: npx @opennextjs/cloudflare build
+        run: npx opennextjs-cloudflare build
+        env:
+          CI: true
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Project name đã được đổi thành 'nextjs'
-          command: pages deploy .open-next --project-name=nextjs-demo --compatibility-flags=nodejs_compat
+          # Sử dụng lệnh deploy của Worker thay vì Pages
+          # OpenNext build xong cho Worker sẽ nằm ở .open-next/worker.js
+          command: deploy .open-next/worker.js --name nextjs --compatibility-flag=nodejs_compat --compatibility-date=2024-11-01
