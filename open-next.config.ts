@@ -1,9 +1,16 @@
-import { defineExample } from "@opennextjs/cloudflare";
-
-export default {
+const config = {
   default: {
-    runtime: "cloudflare-nodejs",
+    override: {
+      wrapper: "cloudflare-node",
+      converter: "edge",
+      proxyExternalRequest: "fetch",
+      incrementalCache: "dummy",
+      tagCache: "dummy",
+      queue: "dummy",
+    },
   },
-} satisfies never;
-// Lưu ý: Tùy phiên bản @opennextjs/cloudflare, bạn có thể cần điều chỉnh template
-// nhưng cấu hình trên là cơ bản nhất để chạy chế độ nodejs_compat.
+  // Nếu bạn có dùng các thư viện node native như crypto, hãy thêm vào đây
+  edgeExternals: ["node:crypto"],
+};
+
+export default config;
