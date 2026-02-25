@@ -1,0 +1,8 @@
+name = "nextjs"
+compatibility_date = "2024-01-01"
+compatibility_flags = [ "nodejs_compat" ]
+pages_build_output_dir = ".open-next"
+
+# Nếu bạn có dùng các biến môi trường, có thể khai báo ở đây
+# [vars]
+# MY_VARIABLE = "value"
