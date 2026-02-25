@@ -3,7 +3,7 @@ name: Deploy Next.js to Cloudflare
 on:
   push:
     branches:
-      - master  # Hoặc branch production của bạn
+      - main
 
 jobs:
   deploy:
@@ -25,14 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Bước này dùng OpenNext để build cho Cloudflare
-      - name: Build Project
-        run: npx @opennextjs/cloudflare
+      - name: Build with OpenNext
+        # Thêm command 'build' để tránh lỗi "got 0, need at least 1"
+        run: npx @opennextjs/cloudflare build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Đường dẫn output của OpenNext thường là .open-next
+          # Project name đã được đổi thành 'nextjs'
           command: pages deploy .open-next --project-name=nextjs
