@@ -23,7 +23,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm install @opennextjs/cloudflare@1.17.1 --save-dev
 
       - name: Build with OpenNext
         # Thêm command 'build' để tránh lỗi "got 0, need at least 1"
